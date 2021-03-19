@@ -1,12 +1,12 @@
-import numpy as np
-import matplotlib.pyplot as plot
-
 # Vibrations Course
 # Mechanical Engineering Post Graduation Program
 # UNESP - Ilha Solteira, SP - Brazil
 # ####
 # Work by Lucas Veronez Goulart Ferreira
 # ####
+
+import numpy as np
+import matplotlib.pyplot as plot
 
 # Forced Vibration of a Single-Degree of Freedom
 # Input: Harmonic Force f(t) = F.sin(w.t)
