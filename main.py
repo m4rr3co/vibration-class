@@ -19,7 +19,7 @@ f = force = 10  # Newtons
 w = omega = 10*np.pi  # rad/s
 f_of_t = f*np.sin(w*interval)
 m = mass = 1  # Kilograms [kg]
-k = stiffness = 1  # Newton/meter [N/m]
+k = stiffness = 10e4  # Newton/meter [N/m]
 damping_ratio = 0.1
 
 # Time domain analysis
@@ -30,10 +30,18 @@ print('Amplitude of response = '+str(Xo)+' N')
 phi = np.arctan(w*c/k-np.float_power(w,2)*m)
 print('Phase angle = '+str(phi)+' rad')
 x = Xo*np.sin(w*interval+phi)
+deltast = f/k  # Deflection under static force f
 # Plots
 # plot.title('Red Curve - f(t) [N] \n Green Curve - response [mm]')
 # plot.plot(interval,f_of_t,'r')
 # plot.plot(interval,1000*x,'g')
+# plot.show()
+
+# zeta = damping_ratios = np.concatenate((np.arange(0.1,1,0.1),np.arange(1,5,0.5)))
+# for damping_ratio in damping_ratios:
+#    r = frequency_ratios = np.arange(0,5,0.01)
+#    amplitude_over_deltast = 1/np.sqrt(np.float_power((1-np.float_power(r,2)),2)+np.float_power(2*damping_ratio*r,2))
+#    plot.plot(frequency_ratios,amplitude_over_deltast)
 # plot.show()
 
 # Frequency domain analysis
