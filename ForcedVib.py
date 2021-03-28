@@ -14,7 +14,7 @@ import matplotlib.pyplot as plot
 # Solution: x = Xo . sin(w.t + phi)
 
 # Example: F = 10N, w = 10pi rad/s, m = 1kfg, Damping ratio = 0.1, k = 10 N/m
-interval = np.arange(0,2,0.001)  # Time interval [0,0.001,...,10] seconds
+interval = np.arange(0,2,0.001)  # Time interval [0,0.001,...,2] seconds
 f = force = 10  # Newtons
 w = omega = 10*np.pi  # rad/s
 f_of_t = f*np.sin(w*interval)
