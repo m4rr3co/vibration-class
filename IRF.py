@@ -10,6 +10,7 @@ import matplotlib.pyplot as plot
 
 # Forced Vibration of a Single-Degree of Freedom Mass-Spring-Dampener System
 # Input: Impulse
+# Solution: x(t) =
 # Parameters
 mass = 1  # Kilograms [kg]
 stiffness = 10e4  # Newton/meter [N/m]
