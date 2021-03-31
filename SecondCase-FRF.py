@@ -26,7 +26,7 @@ c = np.array(damping_ratio)*cc  # Damping values
 print('Damping ratios (Zeta): '+str(damping_ratio))
 print('Damping values [N.s/m]: '+str(c))
 pi = np.pi  # Pi = Everyone knows what this is
-interval = w = np.arange(15,19,0.1)  # Frequency interval [0,0.1,...,100] Hertz
+interval = w = np.arange(0,50,0.01)  # Frequency interval [0,0.1,...,100] Hertz
 
 colors = ['r','g','b']
 j = 1j
@@ -36,7 +36,11 @@ for i in range(0,3):
     imaginary_part = x.imag
     real_part = x.real
     phase = np.angle(x)
-    plot.plot(w,180*np.angle(x)/pi,colors[i])
+    # plot.plot(w,np.abs(x),colors[i])  # Absolute value
+    # plot.plot(w,phase,colors[i])  # Phase plot
+    # plot.plot(w,real_part,colors[i])  # Real part plot
+    # plot.plot(w,imaginary_part,colors[i])  # Imaginary part plot
+    # plot.plot(real_part,imaginary_part,colors[i])  # Nyquist plot
 plot.show()
 
 
