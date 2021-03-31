@@ -14,22 +14,32 @@ from scipy.signal import hilbert, chirp
 # Solution: H(wj) = X/F = 1 / (k-m*w^2+j*w*c)
 # Parameters
 mass = m = 1  # Kilograms [kg]
-stiffness = 10e4  # Newton/meter [N/m]
+stiffness = k = 10e4  # Newton/meter [N/m]
 wn = np.sqrt(stiffness/mass)  # Natural frequency
 critical_damping = cc = 2*m*wn  # zeta = c/cc
 
 # Damping Ratio
 # For now, these are given, but can be calculated from
 # response as will be shown further on.
-damping_ratio = [0.1,0.01,0.001]  # No dimension, i.e.: zeta = c/sqrt(m.k)
+damping_ratio = [0.999,0.5,0.3]  # No dimension, i.e.: zeta = c/sqrt(m.k)
 c = np.array(damping_ratio)*cc  # Damping values
 print('Damping ratios (Zeta): '+str(damping_ratio))
 print('Damping values [N.s/m]: '+str(c))
 pi = np.pi  # Pi = Everyone knows what this is
-interval = t = np.arange(0,1.5,0.001)  # Time interval [0,0.001,...,10] seconds
-
+interval = w = np.arange(15,19,0.1)  # Frequency interval [0,0.1,...,100] Hertz
 
 colors = ['r','g','b']
+j = 1j
+
+for i in range(0,3):
+    x = 1 / (k-(m*np.exp2(w))+(w*c[i]*j))
+    imaginary_part = x.imag
+    real_part = x.real
+    phase = np.angle(x)
+    plot.plot(w,180*np.angle(x)/pi,colors[i])
+plot.show()
+
+
 
 
 # for i in range(0,3):
