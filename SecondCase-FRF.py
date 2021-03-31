@@ -42,12 +42,3 @@ for i in range(0,3):
     # plot.plot(w,imaginary_part,colors[i])  # Imaginary part plot
     # plot.plot(real_part,imaginary_part,colors[i])  # Nyquist plot
 plot.show()
-
-
-
-
-# for i in range(0,3):
-    # x = (np.exp(-damping_ratio[i]*wn*t)/wd[i]*m)*np.sin(wd[i]*t)
-    # plot.plot(t,x,c[i])
-    # plot.plot(t,x,c[i])
-#plot.show()
