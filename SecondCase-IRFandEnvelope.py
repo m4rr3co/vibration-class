@@ -7,6 +7,7 @@
 
 import numpy as np
 import matplotlib.pyplot as plot
+from scipy.signal import hilbert, chirp
 
 # Forced Vibration of a Single-Degree of Freedom Mass-Spring-Dampener System
 # Input: Impulse
@@ -20,21 +21,27 @@ wn = np.sqrt(stiffness/mass)  # Natural frequency
 # For now, these are given, but can be calculated from
 # response as will be shown further on.
 damping_ratio = [0.1,0.01,0.001]  # No dimension, i.e.: zeta = c/sqrt(m.k)
+print('Damping ratios (Zeta): '+str(damping_ratio))
 pi = np.pi  # Pi = Everyone knows what this is
-interval = np.arange(0,1,0.001)  # Time interval [0,0.001,...,10] seconds
+interval = t = np.arange(0,1.5,0.001)  # Time interval [0,0.001,...,10] seconds
 
 # Calculated Parameters
 wd = [0,0,0]  # Defining array of values for Damped natural frequencies
 for i in range(len(damping_ratio)):
     wd[i] = wn*np.sqrt(1-np.float_power(damping_ratio[i],2))
-print('Damping ratios (Zeta): '+str(damping_ratio))
 print('Damped natural frequencies [Hz]: '+str(wd))
+
 
 colors = c = ['r','g','b']
 for i in range(0,3):
-    x = (np.exp(-damping_ratio[i]*wn*interval)/wd[i]*m)*np.sin(wd[i]*interval)
-    plot.plot(interval,x,c[i])
+    x = (np.exp(-damping_ratio[i]*wn*t)/wd[i]*m)*np.sin(wd[i]*t)
+    plot.plot(t,x,c[i])
+    hilbert_result = hilbert(x)  # Hilbert Transform of the signal
+    signal_envelope = np.abs(hilbert_result)  # Envelope of the signal
+    plot.plot(t,x,c[i])
+    plot.plot(t,signal_envelope,c[i])
 plot.show()
+
 
 
 
