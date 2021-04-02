@@ -9,7 +9,7 @@ import numpy as np
 import matplotlib.pyplot as plot
 from scipy.signal import hilbert
 
-# Estimation of Damping
+# Estimation of Damping from IRF
 # IRF: x(t) = (e^(zeta*wn*t)/m*wd)*sin(wd*t)
 # Parameters
 mass = m = 1  # Kilograms [kg]

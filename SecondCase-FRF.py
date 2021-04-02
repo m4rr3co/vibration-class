@@ -26,13 +26,13 @@ c = np.array(damping_ratio)*cc  # Damping values
 print('Damping ratios (Zeta): '+str(damping_ratio))
 print('Damping values [N.s/m]: '+str(c))
 pi = np.pi  # Pi = Everyone knows what this is
-interval = w = np.arange(0,50,0.01)  # Frequency interval [0,0.1,...,100] Hertz
+interval = w = np.arange(0,50,0.01)  # Frequency interval [0,0.1,...,100] rad/s
 
 colors = ['r','g','b']
 j = 1j
 
 for i in range(0,3):
-    x = 1 / (k-(m*np.exp2(w))+(w*c[i]*j))
+    x = 1 / (k-(m*w**2)+(w*c[i]*j))
     imaginary_part = x.imag
     real_part = x.real
     phase = np.angle(x)
