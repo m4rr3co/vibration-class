@@ -38,6 +38,7 @@ for i in range(len(damping_ratio)):
 print('Damped natural frequencies [rad/s]: '+str(wd))
 
 colors = ['r','g','b']
+cdr = [0,0,0]
 j = 1j
 for i in range(0,3):
     Hwj = 1 / ((k - (m * w**2)) + (w * c[i] * j))
@@ -50,11 +51,9 @@ for i in range(0,3):
     b = find_nearest(second_part, max_value / np.sqrt(2))
     index_of_3dblower1 = np.where(abs_of_Hwj == a)[0][0]
     index_of_3dblower2 = np.where(abs_of_Hwj == b)[0][0]
-    calculated_damping_ratio = cdr = (w[index_of_3dblower2]-w[index_of_3dblower1])/(2*w[index_of_max])
-    print('result: '+str(cdr))
-
+    cdr[i] = (w[index_of_3dblower2]-w[index_of_3dblower1])/(2*w[index_of_max])
 print('Damping ratios (Zeta): '+str(damping_ratio))
-
+print('Calculated damping ratios (Zeta): '+str(cdr))
 
 
 
