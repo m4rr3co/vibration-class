@@ -13,42 +13,25 @@ from scipy.fft import fft, fftfreq
 # Input: Impulse
 # Output: x(t) = (e^(zeta*wn*t)/m*wd)*sin(wd*t)
 # Parameters
+j = 0+1j  # Imaginary unit
 mass = m = 1  # Kilograms [kg]
 stiffness = k = 10e3  # Newton/meter [N/m]
 damping_ratio = [0.1,0.01,0.001]
-
-# Imaginary unit
-j = 0+1j
-
-# Calculated Parameters
 natural_frequency = wn = np.sqrt(stiffness/mass)
+fn = wn/ (2 * np.pi)
 critical_damping = cc = 2*m*wn
-wd = [0,0,0]  # Defining array of values for Damped natural frequencies
-damping = c = [0,0,0]
-damped_frequency = df = [0,0,0]
-for i in range(len(damping_ratio)):
-    wd[i] = wn*np.sqrt(1-np.float_power(damping_ratio[i],2))
-    c[i] = damping_ratio[i]*cc
-    df[i] = wd[i]/(2*np.pi)
+c = cc * damping_ratio[0]
+wd = wn*np.sqrt(1-(damping_ratio[0]**2))
+fd = wd / (2 * np.pi)
 
-print('Natural frequency: '+str(wn)+' rad/s.')
-print('Damping ratios (Zeta): '+str(damping_ratio))
-print('Damped natural frequencies [rad/s]: '+str(wd))
-print('Damped natural frequencies [Hz]: '+str(df))
+angular_velocity = w = np.arange(0,300,1)
+H_wj = 1 / (k-(m*w**2)+(w*c*j))
 
-sample_spacing = 0.001
-interval = t = np.arange(0,0.3,sample_spacing)  # Time interval [0,0.001,0.002,...] seconds
-x = (np.exp(-damping_ratio[0]*wn*t)/(wd[0]*m)) * np.sin(wd[0]*t)
-fourier = fft(x)
-freqs = f = fftfreq(len(x),sample_spacing)
-xf = (1/(k-(m*((2*np.pi*f)**2))+((2*np.pi*f)*c[0]*j)))
-x1 = np.fft.ifft(xf)
-print(len(x))
-print(len(fourier))
-print(len(freqs))
+sample_spacing = dt = 0.001
+window = 2 * np.pi * 100
+time_interval = t = np.arange(0,window,dt)
+x = (np.exp(-damping_ratio[0]*(2 * np.pi * fn)*t)/(2 * np.pi * fd)*m)*np.sin((2 * np.pi * fd)*t)
 
-# plot.plot(t,x1)
-# plot.plot(t,x)
-# plot.plot(freqs,np.abs(xf))
-plot.plot(freqs,np.abs(fourier))
+H_dwj = fft(x)
+plot.plot(np.abs(H_dwj))
 plot.show()
