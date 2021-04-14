@@ -15,6 +15,7 @@ window = 1252.58204  # seconds
 start_time = 5.12837  # seconds
 end_time = start_time+window  # seconds
 number_of_samples = N = int(sample_frequency * window)  # seconds
+time_interval = t = np.linspace(start_time,end_time,number_of_samples)
 
 # Signal: Impulse Response Function
 mass = m = 1  # [Kg]
@@ -28,9 +29,9 @@ wd = wn * np.sqrt(1-damping_ratio**2)  # [rad/s] - Damped Natural Frequency
 fd = wd / (2 * np.pi)  # [Hz] - Damped Natural Frequency
 print('Calculated Damped Natural Frequency = '+str(fd)+' Hz.')
 
-time_interval = t = np.linspace(start_time,end_time,number_of_samples)
+# Impulse response function as a function of time in seconds.
+# Frequencies used here are calculated in Hz.
 samples = y = (np.exp(-damping_ratio*(2 * np.pi * fn)*t)/(2 * np.pi * fd)*m)*np.sin(2 * np.pi * fd * t)
-
 ft = fft(y)  # Fast Fourier Transform of the sampled signal
 
 #  Normalized frequency bins.   (i.e.: The X axis represents the frequency components
