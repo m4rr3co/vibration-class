@@ -10,7 +10,7 @@ import matplotlib.pyplot as plot
 from scipy.fft import fft, fftfreq
 
 # Sampling Parameters
-sample_frequency = 128  # Hz
+sample_frequency = 120  # Hz
 window = 12.58204  # seconds
 start_time = 5.12837  # seconds
 end_time = start_time+window  # seconds
