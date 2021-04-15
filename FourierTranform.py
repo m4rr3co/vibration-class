@@ -10,8 +10,8 @@ import matplotlib.pyplot as plot
 from scipy.fft import fft, fftfreq
 
 # Sampling Parameters
-sample_frequency = 12893  # Hz
-window = 1252.58204  # seconds
+sample_frequency = 128  # Hz
+window = 12.58204  # seconds
 start_time = 5.12837  # seconds
 end_time = start_time+window  # seconds
 number_of_samples = N = int(sample_frequency * window)  # seconds
@@ -34,10 +34,9 @@ print('Calculated Damped Natural Frequency = '+str(fd)+' Hz.')
 samples = y = (np.exp(-damping_ratio*(2 * np.pi * fn)*t)/(2 * np.pi * fd)*m)*np.sin(2 * np.pi * fd * t)
 ft = fft(y)  # Fast Fourier Transform of the sampled signal
 
-#  Normalized frequency bins.   (i.e.: The X axis represents the frequency components
-#                               of the sampled signals in Hz.)
+#  freq_bins: The X axis represents the frequency components of the sampled signals in Hz.
 freq_bins = np.linspace(0,sample_frequency,number_of_samples)
-plot.plot(freq_bins,np.abs(ft))  # fft X frequency bins chart
+plot.plot(freq_bins,np.abs(ft))  # fft versus frequency bins chart
 plot.show()
 
 max_index = np.where(np.abs(ft) == max(np.abs(ft)))
