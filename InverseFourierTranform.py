@@ -22,18 +22,23 @@ fd = wd / (2 * np.pi)  # [Hz] - Damped Natural Frequency
 print('Calculated Damped Natural Frequency = '+str(fd)+' Hz.')
 
 # Sampling Parameters
-frequency_range = 6*fn
-sample_spacing = 0.01
-number_of_samples = int(frequency_range/sample_spacing)
+frequency_range = 2*fn
+frequency_spacing = 0.001
+number_of_samples = int(frequency_range / frequency_spacing)
 
 #  freq_bins: The X axis represents the frequency components of the sampled signals in Hz.
-freq_bins = f = np.linspace(-frequency_range/2,frequency_range/2,number_of_samples)
+freq_bins = f = np.linspace(0,frequency_range,number_of_samples)
 frf = 1/(k-(m*((2 * np.pi * f)**2))+(1j * c * (2 * np.pi * f)))
-ift = ifft(frf)/sample_spacing
+frf = np.concatenate((frf,np.flip(np.conj(frf))))
 
 plot.subplot(2,1,1)
-plot.plot(freq_bins,np.abs(frf))
+plot.yscale('log')
+plot.plot(np.abs(frf))
 
 plot.subplot(2,1,2)
-plot.plot(np.real(ift))
+plot.plot(np.unwrap(np.angle(frf)))
+
+# plot.subplot(4,1,4)
+# plot.plot(x)
+
 plot.show()
