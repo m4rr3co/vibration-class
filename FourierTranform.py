@@ -31,7 +31,7 @@ print('Calculated Damped Natural Frequency = '+str(fd)+' Hz.')
 
 # Impulse response function as a function of time in seconds.
 
-#  freq_bins: The X axis represents the frequency components of the sampled signals in Hz.
+#  freq_bins: The X axis represents the frequency components of the sampled signal in Hz.
 freq_bins = f = np.linspace(0,sample_frequency,number_of_samples)
 
 # Frequencies used here are calculated in Hz.
