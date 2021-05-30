@@ -7,7 +7,6 @@
 
 import numpy as np
 import matplotlib.pyplot as plot
-from scipy.signal import hilbert, chirp
 
 # Forced Vibration of a Single-Degree of Freedom Mass-Spring-Dampener System
 # Objective: Frequency Response Function
