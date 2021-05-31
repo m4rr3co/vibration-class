@@ -14,7 +14,7 @@ from scipy.signal import hilbert
 # Solution: x(t) = (e^(zeta*wn*t)/m*wd)*sin(wd*t)
 # Parameters
 mass = m = 1  # Kilograms [kg]
-stiffness = 10e4  # Newton/meter [N/m]
+stiffness = 1e4  # Newton/meter [N/m]
 wn = np.sqrt(stiffness/mass)  # Natural frequency
 
 # Damping Ratio
@@ -23,7 +23,7 @@ wn = np.sqrt(stiffness/mass)  # Natural frequency
 damping_ratio = [0.1,0.01,0.001]  # No dimension, i.e.: zeta = c/sqrt(m.k)
 print('Damping ratios (Zeta): '+str(damping_ratio))
 pi = np.pi  # Pi = Everyone knows what this is
-interval = t = np.arange(0,1.5,0.001)  # Time interval [0,0.001,...,10] seconds
+interval = t = np.arange(0,1,0.001)  # Time interval [0,0.001,...,10] seconds
 
 # Calculated Parameters
 wd = [0,0,0]  # Defining array of values for Damped natural frequencies
@@ -34,12 +34,20 @@ print('Damped natural frequencies [Hz]: '+str(wd))
 
 colors = c = ['r','g','b']
 for i in range(0,3):
+    plot.subplot(3,1,i+1)
     x = (np.exp(-damping_ratio[i]*wn*t)/wd[i]*m)*np.sin(wd[i]*t)
     plot.plot(t,x,c[i])
     hilbert_result = hilbert(x)  # Hilbert Transform of the signal
     signal_envelope = np.abs(hilbert_result)  # Envelope of the signal
-    plot.plot(t,x,c[i])
-    plot.plot(t,signal_envelope,c[i])
+    plot.plot(t,signal_envelope,label='\u03B6 = '+str(damping_ratio[i]))
+    plot.xlim([-0.01, max(t) / 1.1])
+    plot.rcParams["legend.loc"] = 'upper right'
+    if i < 2:
+        plot.xticks([])
+    if i == 1:
+        plot.ylabel('Displacement [m]')
+    plot.legend()
+plot.xlabel('Time [s]')
 plot.show()
 
 
