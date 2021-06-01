@@ -54,7 +54,6 @@ for i in range(0,3):
     cdr[i] = -poly_fit[0]/wn
     plot.plot(t,signal_envelope,c[i],label='\u03B6 = '+str(damping_ratio[i]))
     plot.plot(np.arange(lower_limits[i],upper_limits[i],0.001),expo_curve)
-# plot.xscale('log')
 plot.yscale('log')
 plot.ylabel('Displacement [m]')
 plot.xlabel('Time [s]')
