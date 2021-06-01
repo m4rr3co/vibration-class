@@ -54,8 +54,3 @@ for i in range(0,3):
     cdr[i] = (w[index_of_3dblower2]-w[index_of_3dblower1])/(2*w[index_of_max])
 print('Damping ratios (Zeta): '+str(damping_ratio))
 print('Calculated damping ratios (Zeta): '+str(cdr))
-
-
-
-
-

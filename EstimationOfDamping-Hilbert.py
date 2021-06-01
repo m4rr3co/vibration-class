@@ -61,8 +61,3 @@ plot.legend()
 plot.show()
 print('Real damping ratios (Zeta): '+str(damping_ratio))
 print('Calculated damping ratios: '+str(cdr))
-
-
-
-
-

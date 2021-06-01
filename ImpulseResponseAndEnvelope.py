@@ -49,8 +49,3 @@ for i in range(0,3):
     plot.legend()
 plot.xlabel('Time [s]')
 plot.show()
-
-
-
-
-
