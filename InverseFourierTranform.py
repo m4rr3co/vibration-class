@@ -37,6 +37,9 @@ x_t = ifft(double_sided_frf)/delta  # Calculation of the IFFT of the double-side
 # Analytical impulse response function
 x_t_true = (np.exp(-damping_ratio*(2 * np.pi * fn)*t)/(2 * np.pi * fd)*m)*np.sin(2 * np.pi * fd * t)
 
-plot.plot(t,np.real(x_t))
-plot.plot(t,x_t_true)
+plot.plot(t,np.real(x_t),label='IFFT of the FRF')
+plot.plot(t,x_t_true,label='True h(t)')
+plot.xlabel('Time [s]')
+plot.ylabel('Displacement [m]')
+plot.legend()
 plot.show()
