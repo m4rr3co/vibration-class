@@ -14,7 +14,7 @@ from scipy import signal
 
 # Signal: Impulse Response Function
 mass = m = 1  # [Kg]
-stiffness = k = 10e3  # [N/m]
+stiffness = k = 1e4  # [N/m]
 wn = np.sqrt(k/m)  # [rad/s] - Natural Frequency
 fn = wn / (2 * np.pi)  # [Hz] - Natural Frequency
 damping_ratio = 0.01  # Zeta
