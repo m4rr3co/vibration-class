@@ -12,7 +12,7 @@ from scipy.fft import fft
 # Sampling Parameters
 delta = 0.01  # seconds
 sample_frequency = 1/delta  # Hz
-tmax = 11.73  # seconds
+tmax = 1330.73  # seconds
 time_interval = t = np.arange(0,tmax,delta)
 
 # Signal: Impulse Response Function
