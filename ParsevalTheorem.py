@@ -30,7 +30,7 @@ x = chirp(t,f0=1,t1=tmax/2,f1=5)
 ft = fft(x)*delta
 
 msv = np.mean(x**2)
-int1 = sum(np.abs(ft ** 2))/(tmax ** 2)
+int1 = sum(((np.abs(ft)/tmax)**2))
 
 # Difference between MSV of the signal and sum of of FFT's coefficients
 print(str(msv-int1))  # -1.931049561976206e-06
@@ -40,7 +40,7 @@ x = np.random.random(len(t))
 ft = fft(x)*delta
 
 msv = np.mean(x**2)
-int1 = sum(np.abs(ft ** 2))/(tmax ** 2)
+int1 = sum(((np.abs(ft)/tmax)**2))
 
 # Difference between MSV of the signal and sum of of FFT's coefficients
 print(str(msv-int1))  # -1.2883146801034862e-06
