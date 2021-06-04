@@ -35,8 +35,7 @@ for i in range(len(zeta)):
     f_t = np.random.normal(0,1,len(t))
     h = (np.exp(-zeta[i]*wn*t)/wd[i]*m)*np.sin(wd[i]*t)
     x_t = np.convolve(h,f_t,'full')[:len(t)]
-    x_t = x_t + np.random.normal(0,0.00005,len(t))
-    noise = max(x_t)
+    x_t_noised = x_t + np.random.normal(0,0.00005,len(t))
 
     # Fourier Transforms
     freq_bins = f = np.linspace(0,fs,len(t))
@@ -48,25 +47,27 @@ for i in range(len(zeta)):
     Sff = (np.conj(Fw)*Fw)/tmax
     Sxx = (np.conj(Xw)*Xw)/tmax
 
-    H1 = Sfx/Sff
+    # H1 = (Sfx/Sff)*delta
+    # frf_analytical = fft(h)*delta
+    # plot.subplot(2,1,1)
+    # plot.title('Transfer Function for \u03B6 = 0.1')
+    # plot.plot(f, np.abs(H1),label='TF Estimate')
+    # plot.plot(f,np.abs(frf_analytical),label='FFT of h(t)')
+    # plot.ylabel('Transfer Function H = X/F')
+    # plot.legend()
+    # plot.subplot(2,1,2)
+    # plot.plot(f,np.angle(H1))
+    # plot.plot(f,np.unwrap(np.angle(frf_analytical)))
+    # plot.xlabel('Frequency [Hz]')
+    # plot.ylabel('Phase \u03C6 [rad]')
+    # plot.show()
 
     f1,cohe = ch(f_t,x_t,1/delta,nperseg=2048)
-    plot.plot(f1,cohe)
+    f2,cohe2 = ch(f_t, x_t_noised, 1 / delta, nperseg=2048)
+    plot.plot(f2,cohe2,label='Noised')
+    plot.plot(f1, cohe, label='Non-noised')
     plot.ylim([0,1.1])
-
-    # frf_analytical = 1 / (k-(m*(2*np.pi*f)**2)+((2*np.pi*f)*c*1j))
-
-    # plot.plot(w,np.abs(H1/tmax))
-    # plot.plot(w,np.abs(frf_analytical))
-    # plot.xlim([0,fs/2])
-    # plot.show()
-
-    # plot.plot(w,np.unwrap(np.angle(H1/tmax)))
-    # plot.plot(w,np.angle(frf_analytical))
-    # plot.xlim([0,fs/2])
-    # plot.show()
-plot.show()
-
-
-
-
+    plot.ylabel('\u03B3xy^2')
+    plot.xlabel('Frequency [Hz]')
+    plot.legend()
+    plot.show()
