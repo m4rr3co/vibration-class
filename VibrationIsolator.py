@@ -15,8 +15,9 @@ mass = m = 10  # Kilograms [kg]
 fn = 5  # Natural Frequency [Hz]
 wn = 2*np.pi*fn  # Natural Frequency [rad/s]
 stiffness = k = (wn**2)*m  # Newton/meter [N/m]
+print(k)
 critical_damping = cc = 2*m*wn  # zeta = c/cc
-zeta = 0.05
+zeta = 0.005
 c = zeta*cc
 wd = wn*np.sqrt(1-(zeta ** 2))
 
@@ -46,7 +47,9 @@ H_est = Yw/Xw
 # Extracting k
 H_max = max(np.abs(H_est))
 fn_est = f[np.where(np.abs(H_est) == H_max)]
+print(m*(fn_est[0]*2*np.pi)**2)
 
 # Extracting zeta
 zeta_est = 1/(2*(H_max-1))
+print(zeta)
 print(zeta_est)
