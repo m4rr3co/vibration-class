@@ -43,8 +43,11 @@ for i in range(len(ang_vel)):
     Hs.append(Z_inv[0][0])
     Ha.append(Z_inv[1][0])
 
-plot.plot(f,np.abs(Ha))
-plot.plot(f,np.abs(Hs))
+plot.plot(f,np.abs(Ha),label='Absorber')
+plot.plot(f,np.abs(Hs),label='Structure')
+plot.xlabel('Frequency [Hz]')
+plot.ylabel('Xi/F \n i = Absorber, Structure')
+plot.legend()
 plot.show()
 
 double_sided_Ha = ds_Ha = Ha+np.conj(np.flip(Ha))  # Formation of the double-sided spectrum
@@ -57,6 +60,43 @@ Fs_w = fft(Fs)*delta
 xa_t = ifft(ds_Ha*Fs_w)/delta
 xs_t = ifft(ds_Hs*Fs_w)/delta
 
-plot.plot(t,xa_t)
-plot.plot(t,xs_t)
+# Fourier Transforms
+Xaw = fft(xa_t)*delta
+Xsw = fft(xs_t)*delta
+Fw = Fs_w
+
+# Power Spectral Densities Absorber
+Sfxa = (np.conj(Fw)*Xaw)/tmax
+Sffa = (np.conj(Fw)*Fw)/tmax
+Sxxa = (np.conj(Xaw)*Xaw)/tmax
+
+# Power Spectral Densities Structure
+Sfxs = (np.conj(Fw)*Xsw)/tmax
+Sffs = (np.conj(Fw)*Fw)/tmax
+Sxxs = (np.conj(Xsw)*Xsw)/tmax
+
+Ha1 = (Sfxa/Sffa)
+Hs1 = (Sfxs/Sffs)
+
+plot.subplot(2,2,1)
+plot.plot(f,np.abs(ds_Ha),label='Absorber')
+plot.plot(f,np.abs(Ha1),label='Structure')
+plot.legend()
+plot.ylabel('X/F')
+
+plot.subplot(2,2,2)
+plot.plot(f,np.abs(ds_Hs))
+plot.plot(f,np.abs(Hs1))
+
+plot.subplot(2,2,3)
+plot.plot(f,np.unwrap(np.angle(ds_Ha)))
+plot.plot(f,np.unwrap(np.angle(Ha1)))
+plot.ylabel('Phase [rad]')
+plot.xlabel('Frequency [Hz]')
+
+plot.subplot(2,2,4)
+plot.plot(f,np.unwrap(np.angle(ds_Hs)))
+plot.plot(f,np.unwrap(np.angle(Hs1)))
+plot.xlabel('Frequency [Hz]')
+
 plot.show()
