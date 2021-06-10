@@ -20,7 +20,7 @@ x = np.sin(2*np.pi*f*t)
 ft = fft(x)*delta
 
 msv = np.mean(x**2)
-int1 = sum(((np.abs(ft)/tmax)**2))
+int1 = sum(((np.abs(ft/tmax))**2))
 
 # Difference between MSV of the signal and sum of of FFT's coefficients
 print(str(msv-int1))  # -1.9324034702949966e-06
